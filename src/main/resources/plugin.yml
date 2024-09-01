@@ -1,0 +1,11 @@
+name: AdvancedAuctions
+version: '${project.version}'
+main: me.knvtva.advancedauctions.AdvancedAuctions
+api-version: '1.19'
+load: STARTUP
+
+commands:
+  auction:
+    description: Opens the Auction GUI
+    usage: /auction
+
