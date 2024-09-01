@@ -28,6 +28,11 @@ public class ConfigCreator {
             if(primaryConfig.createNewFile()) {
                 Logger.LogInfo("Created Primary Config...");
                 primaryConfigFile = YamlConfiguration.loadConfiguration(primaryConfig);
+                primaryConfigFile.set("database.host", "");
+                primaryConfigFile.set("database.port", 3306);
+                primaryConfigFile.set("database.name", "");
+                primaryConfigFile.set("database.username", "");
+                primaryConfigFile.set("database.password", "");
                 primaryConfigFile.set("auctions.max-auctions", 5);
                 primaryConfigFile.save(primaryConfig);
             } else {
