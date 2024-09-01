@@ -35,12 +35,19 @@ public class ConfigCreator {
                 primaryConfigFile.set("database.password", "");
                 primaryConfigFile.set("auctions.max-auctions", 5);
                 primaryConfigFile.save(primaryConfig);
+                loadConfig();
             } else {
                 Logger.LogInfo("Reading Primary Config Data...");
+                loadConfig();
             }
         } catch (Exception e) {
             Logger.LogError("An error occurred trying to create primary config.");
             Logger.LogError(e.getMessage());
         }
+    }
+
+    private static void loadConfig() {
+        File primaryConfig = new File(pluginDirectory, "config.yml");
+        primaryConfigFile = YamlConfiguration.loadConfiguration(primaryConfig);
     }
 }

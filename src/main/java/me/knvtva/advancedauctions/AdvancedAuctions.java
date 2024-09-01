@@ -1,14 +1,14 @@
 package me.knvtva.advancedauctions;
 
 import me.knvtva.advancedauctions.Commands.OpenAuctionGUI.AuctionCommand;
-import me.knvtva.advancedauctions.Commands.OpenAuctionGUI.Events.GUIManager;
+import me.knvtva.advancedauctions.Events.GUI.GUIManager;
 import me.knvtva.advancedauctions.ConfigManager.ConfigCreator;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.event.Listener;
+import me.knvtva.advancedauctions.Database.MySQLManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.sql.SQLException;
+
 import static me.knvtva.advancedauctions.ConfigManager.ConfigCreator.CreatePrimaryConfig;
-import static me.knvtva.advancedauctions.ConfigManager.ConfigCreator.primaryConfigFile;
 
 
 public final class AdvancedAuctions extends JavaPlugin {
@@ -22,6 +22,12 @@ public final class AdvancedAuctions extends JavaPlugin {
             CreatePrimaryConfig();
         } catch (Exception e) {
             Logger.LogError(e.getMessage());
+        }
+
+        try {
+            MySQLManager.MySQLConnect();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
         // Build a better command registerer
