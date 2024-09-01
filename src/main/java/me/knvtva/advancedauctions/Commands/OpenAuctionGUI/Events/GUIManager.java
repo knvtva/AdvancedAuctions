@@ -1,5 +1,8 @@
 package me.knvtva.advancedauctions.Commands.OpenAuctionGUI.Events;
 
+import me.knvtva.advancedauctions.Logger;
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -11,12 +14,25 @@ public class GUIManager implements Listener {
 
     @EventHandler
     public void onGUIClick(InventoryClickEvent e) {
-        if (!(e.getWhoClicked() instanceof Player)) {
+        Logger.LogDebug("GUI: " + e.getView().getTitle());
+        if (e.getWhoClicked() instanceof Player) {
             Player player = (Player) e.getWhoClicked();
             Inventory clickedGUI = e.getClickedInventory();
             ItemStack clickedButton = e.getCurrentItem();
 
-            if (e.getView().getTitle().equals())
+            // Make this a lot better in future for multiple GUI's
+            if (e.getView().getTitle().equals(ChatColor.DARK_GREEN + "Auction House")) {
+                Logger.LogDebug("We are here.");
+                e.setCancelled(true); // Prevents buttons / items from being taken out of the GUI.
+
+                if (clickedButton == null || clickedButton.getType() == Material.AIR) {
+                    return;
+                }
+
+                if (clickedButton.getType() == Material.DIAMOND) {
+                    // Implement a GUI function for ... Material
+                }
+            }
         }
     }
 }
